@@ -1,0 +1,75 @@
+<section class="hero">
+  <div class="container hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">Erling Haaland Fan Community</p>
+      <h1>Share the goals.<br>Start the talk.</h1>
+      <p class="lead">
+        Upload your favorite Haaland photos, celebrate the hat-tricks,
+        and join discussions with fellow fans.
+      </p>
+      <div class="hero-actions">
+        <%= link_to "Share a Photo", new_photo_path, class: "btn btn-primary" %>
+        <%= link_to "Start a Discussion", new_post_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-card">
+        <span class="stat-number"><%= Photo.count %></span>
+        <span class="stat-label">Photos shared</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number"><%= Post.count %></span>
+        <span class="stat-label">Discussions</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-number"><%= Comment.count %></span>
+        <span class="stat-label">Comments</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2>Latest Photos</h2>
+      <%= link_to "View all", photos_path, class: "text-link" %>
+    </div>
+
+    <% if @photos.any? %>
+      <div class="photo-grid">
+        <% @photos.each do |photo| %>
+          <%= render partial: "photos/photo_card", locals: { photo: photo } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>No photos yet. Be the first to share a Haaland moment.</p>
+        <%= link_to "Upload Photo", new_photo_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <h2>Recent Discussions</h2>
+      <%= link_to "View all", posts_path, class: "text-link" %>
+    </div>
+
+    <% if @posts.any? %>
+      <div class="post-list">
+        <% @posts.each do |post| %>
+          <%= render partial: "posts/post_card", locals: { post: post } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>No discussions yet. What do you think about Haaland's latest form?</p>
+        <%= link_to "Start Discussion", new_post_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

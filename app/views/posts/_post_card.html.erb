@@ -1,0 +1,11 @@
+<article class="post-card">
+  <%= link_to post_path(post), class: "post-card-link" do %>
+    <h3><%= post.title %></h3>
+    <p class="post-excerpt"><%= truncate(post.body, length: 160) %></p>
+    <p class="meta">
+      by <%= post.author_name %>
+      · <%= time_ago(post.created_at) %>
+      · <%= pluralize(post.comments.count, "comment") %>
+    </p>
+  <% end %>
+</article>

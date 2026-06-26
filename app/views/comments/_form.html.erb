@@ -1,0 +1,26 @@
+<%= form_with model: [ post, comment ], class: "stack-form" do |form| %>
+  <% if comment.errors.any? %>
+    <div class="form-errors">
+      <p><%= pluralize(comment.errors.count, "error") %> prevented this comment from being saved:</p>
+      <ul>
+        <% comment.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :author_name, "Your name" %>
+    <%= form.text_field :author_name, placeholder: "Your name", required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body, "Comment" %>
+    <%= form.text_area :body, rows: 4, placeholder: "Join the conversation...", required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit "Post Comment", class: "btn btn-primary" %>
+  </div>
+<% end %>

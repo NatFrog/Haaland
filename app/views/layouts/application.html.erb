@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title><%= content_for(:title) || "Haaland Hub — Photos & Discussion" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="description" content="Share Haaland photos and join the conversation about Erling Haaland.">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <%= link_to root_path, class: "brand" do %>
+          <span class="brand-mark">9</span>
+          <span class="brand-text">
+            <strong>Haaland Hub</strong>
+            <small>You get what you give</small>
+          </span>
+        <% end %>
+
+        <nav class="site-nav">
+          <%= link_to "Home", root_path, class: nav_link_class(root_path) %>
+          <%= link_to "Photos", photos_path, class: nav_link_class(photos_path) %>
+          <%= link_to "Discuss", posts_path, class: nav_link_class(posts_path) %>
+        </nav>
+      </div>
+    </header>
+
+    <% if flash.any? %>
+      <div class="container flash-container">
+        <% flash.each do |type, message| %>
+          <div class="flash flash-<%= type %>"><%= message %></div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <main class="main-content">
+      <%= yield %>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p>Haaland Hub — a fan community for sharing moments and match talk.</p>
+      </div>
+    </footer>
+  </body>
+</html>

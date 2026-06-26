@@ -1,0 +1,46 @@
+<% content_for :title, "#{@post.title} — Haaland Hub" %>
+
+<section class="section">
+  <div class="container container-narrow">
+    <article class="post-show">
+      <p class="eyebrow">Discussion</p>
+      <h1><%= @post.title %></h1>
+      <p class="meta">Posted by <%= @post.author_name %> · <%= time_ago(@post.created_at) %></p>
+
+      <div class="post-body">
+        <%= simple_format @post.body %>
+      </div>
+
+      <div class="action-row">
+        <%= link_to "Edit", edit_post_path(@post), class: "btn btn-secondary btn-sm" %>
+        <%= button_to "Delete", @post, method: :delete, class: "btn btn-danger btn-sm", data: { turbo_confirm: "Remove this post and all comments?" } %>
+        <%= link_to "All Discussions", posts_path, class: "text-link" %>
+      </div>
+    </article>
+
+    <section class="comments-section">
+      <h2><%= pluralize(@post.comments.count, "Comment") %></h2>
+
+      <% if @post.comments.any? %>
+        <div class="comment-list">
+          <% @post.comments.recent.each do |comment| %>
+            <article class="comment">
+              <p class="comment-body"><%= simple_format comment.body %></p>
+              <div class="comment-meta">
+                <span>by <%= comment.author_name %> · <%= time_ago(comment.created_at) %></span>
+                <%= button_to "Delete", post_comment_path(@post, comment), method: :delete, class: "text-link text-link-danger", data: { turbo_confirm: "Remove this comment?" } %>
+              </div>
+            </article>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="empty-hint">No comments yet. Be the first to reply.</p>
+      <% end %>
+
+      <div class="form-card form-card-inline">
+        <h3>Add a comment</h3>
+        <%= render "comments/form", post: @post, comment: @comment %>
+      </div>
+    </section>
+  </div>
+</section>

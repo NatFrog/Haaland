@@ -1,0 +1,29 @@
+<% content_for :title, "Photos — Haaland Hub" %>
+
+<section class="page-header">
+  <div class="container page-header-inner">
+    <div>
+      <p class="eyebrow">Gallery</p>
+      <h1>Haaland Photos</h1>
+      <p class="lead">Moments, celebrations, and iconic Haaland shots.</p>
+    </div>
+    <%= link_to "Share Photo", new_photo_path, class: "btn btn-primary" %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <% if @photos.any? %>
+      <div class="photo-grid">
+        <% @photos.each do |photo| %>
+          <%= render partial: "photo_card", locals: { photo: photo } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>The gallery is empty. Upload the first photo.</p>
+        <%= link_to "Share Photo", new_photo_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>

@@ -1,0 +1,32 @@
+<%= form_with model: post, class: "stack-form" do |form| %>
+  <% if post.errors.any? %>
+    <div class="form-errors">
+      <p><%= pluralize(post.errors.count, "error") %> prevented this post from being saved:</p>
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :author_name, "Your name" %>
+    <%= form.text_field :author_name, placeholder: "e.g. Nordic Fan", required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title, "Title" %>
+    <%= form.text_field :title, placeholder: "What's on your mind about Haaland?", required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :body, "Post" %>
+    <%= form.text_area :body, rows: 8, placeholder: "Share your thoughts...", required: true %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit post.new_record? ? "Publish Post" : "Update Post", class: "btn btn-primary" %>
+    <%= link_to "Cancel", post.persisted? ? post_path(post) : posts_path, class: "text-link" %>
+  </div>
+<% end %>

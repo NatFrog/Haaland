@@ -1,0 +1,13 @@
+<article class="photo-card">
+  <%= link_to photo_path(photo), class: "photo-card-link" do %>
+    <div class="photo-card-image">
+      <% if photo.image.attached? %>
+        <%= image_tag photo.image.variant(resize_to_limit: [600, 600]), alt: photo.caption %>
+      <% end %>
+    </div>
+    <div class="photo-card-body">
+      <p class="photo-caption"><%= photo.caption %></p>
+      <p class="meta">by <%= photo.author_name %> · <%= time_ago(photo.created_at) %></p>
+    </div>
+  <% end %>
+</article>

@@ -1,0 +1,35 @@
+<%= form_with model: photo, class: "stack-form" do |form| %>
+  <% if photo.errors.any? %>
+    <div class="form-errors">
+      <p><%= pluralize(photo.errors.count, "error") %> prevented this photo from being saved:</p>
+      <ul>
+        <% photo.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :author_name, "Your name" %>
+    <%= form.text_field :author_name, placeholder: "e.g. City Supporter", required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :caption, "Caption" %>
+    <%= form.text_area :caption, rows: 3, placeholder: "Describe this Haaland moment...", required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :image, "Photo" %>
+    <%= form.file_field :image, accept: "image/jpeg,image/png,image/webp,image/gif", required: photo.new_record? %>
+    <% if photo.image.attached? %>
+      <p class="field-hint">Current photo attached. Choose a new file to replace it.</p>
+    <% end %>
+  </div>
+
+  <div class="form-actions">
+    <%= form.submit photo.new_record? ? "Share Photo" : "Update Photo", class: "btn btn-primary" %>
+    <%= link_to "Cancel", photo.persisted? ? photo_path(photo) : photos_path, class: "text-link" %>
+  </div>
+<% end %>

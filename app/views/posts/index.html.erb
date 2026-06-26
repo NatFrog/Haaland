@@ -1,0 +1,29 @@
+<% content_for :title, "Discuss — Haaland Hub" %>
+
+<section class="page-header">
+  <div class="container page-header-inner">
+    <div>
+      <p class="eyebrow">Community</p>
+      <h1>Haaland Discussions</h1>
+      <p class="lead">Goals, form, transfers, debates — all welcome.</p>
+    </div>
+    <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container-narrow">
+    <% if @posts.any? %>
+      <div class="post-list">
+        <% @posts.each do |post| %>
+          <%= render partial: "post_card", locals: { post: post } %>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="empty-state">
+        <p>No posts yet. Kick off the conversation.</p>
+        <%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
