@@ -1,28 +1,13 @@
 # Haaland
 
-A Ruby on Rails fan community for sharing Haaland photos and starting discussions.
-
 **You get what you give.**
 
 ## Features
 
 - **Photo gallery** — upload and browse Haaland photos (JPEG, PNG, WebP, GIF)
-- **Discussions** — create posts and talk about Haaland with other fans
+- **Discussions** — create posts and talk about Haaland
 - **Comments** — reply to discussion threads
-- **Modern UI** — Manchester City–inspired dark theme with responsive layout
-
-## Requirements
-
-- Ruby 3.3+
-- SQLite 3
-
-## Setup
-
-```bash
-bundle install
-bin/rails db:setup
-bin/rails db:seed   # optional sample discussions
-```
+- **Modern UI** — Manchester City–inspired 
 
 ## Run locally
 
